@@ -1,4 +1,9 @@
-
+# Rodar o phpstan
+./vendor/bin/phpstan
+if [ $? -ne 0 ]; then
+    echo "Opa! Deu ruim aqui com PHPSTAN. Arrume antes de continuar... 😉";
+    exit 1;
+fi;
 
 # rodar os testes
 php artisan test --parallel | php
