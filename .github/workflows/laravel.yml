@@ -14,10 +14,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install system dependencies first
-        run: |
+        run:
           sudo apt-get update
           sudo apt-get install -y libsodium23 libsodium-dev sqlite3 libsqlite3-dev
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
