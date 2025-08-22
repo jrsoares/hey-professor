@@ -10,7 +10,7 @@ class QuestionController extends Controller
     public function store(): RedirectResponse
     {
         Question::query()->create(request()->validate([
-            'question' => ['required', 'string', 'max:1000'],
+            'question' => ['required', 'string', 'min:10', 'max:1000'],
         ]));
 
         return to_route('dashboard');
