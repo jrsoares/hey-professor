@@ -9,7 +9,7 @@ class DashboardController extends Controller
     public function __invoke()
     {
         return view('dashboard', [
-            'questions' => Question::all(),
+            'questions' => Question::withSum('votes', 'like')->withSum('votes', 'unlike')->get(),
         ]);
     }
 }
