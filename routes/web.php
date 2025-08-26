@@ -15,10 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if (app()->isLocal()) {
+        auth()->loginUsingId(1);
+
+        return to_route('dashboard');
+    }
+
     return view('welcome');
 });
 
-Route::post('questions/store', [\App\Http\Controllers\QuestionController::class, 'store'])->name('questions.store');
+Route::post('question/store', [\App\Http\Controllers\QuestionController::class, 'store'])->name('question.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
