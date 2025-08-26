@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('questions/store', [\App\Http\Controllers\QuestionController::class, 'store'])->name('questions.store');
+Route::post('question/store', [\App\Http\Controllers\QuestionController::class, 'store'])->name('question.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
