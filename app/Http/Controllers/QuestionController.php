@@ -62,10 +62,18 @@ class QuestionController extends Controller
         return to_route('question.index');
     }
 
+    public function archive(Question $question)
+    {
+        $this->authorize('archive', $question);
+        $question->delete();
+
+        return back();
+    }
+
     public function destroy(Question $question)
     {
         $this->authorize('destroy', $question);
-        $question->delete();
+        $question->forceDelete();
 
         return back();
     }
