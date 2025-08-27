@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 
 class QuestionController extends Controller
 {
+    public function index()
+    {
+        return view('questions.index', [
+            'questions' => auth()->user()->questions()->get(),
+        ]);
+    }
     public function store(): RedirectResponse
     {
         request()->validate([
@@ -23,5 +30,13 @@ class QuestionController extends Controller
         ]);
 
         return to_route('dashboard');
+    }
+
+    public function destroy(Question $question)
+    {
+        $this->authorize('destroy', $question);
+        $question->delete();
+
+        return back();
     }
 }
