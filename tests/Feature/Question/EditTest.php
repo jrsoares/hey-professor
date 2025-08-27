@@ -18,7 +18,7 @@ it('should return a view', function () {
     actingAs($user);
 
     get(route('question.edit', $question))
-        ->assertViewIs('questions.edit');
+        ->assertViewIs('question.edit');
 });
 
 it('should make sure that only question with status DRAFT can be edited', function () {

@@ -4,7 +4,7 @@ use App\Models\{Question, User};
 
 use function Pest\Laravel\{actingAs, get};
 
-it('should return a list of questions', function () {
+it('should return a list of question', function () {
     $user = User::factory()->create();
     actingAs($user);
     $questions = Question::factory()->count(5)->create([

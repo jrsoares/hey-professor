@@ -10,7 +10,7 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        return view('questions.index', [
+        return view('question.index', [
             'questions' => auth()->user()->questions()->get(),
         ]);
     }
@@ -36,7 +36,7 @@ class QuestionController extends Controller
     {
         $this->authorize('update', $question);
 
-        return view('questions.edit', compact('question'));
+        return view('question.edit', compact('question'));
     }
 
     public function update(Question $question)
@@ -58,7 +58,7 @@ class QuestionController extends Controller
         $question->question = request()->question;
         $question->save();
 
-        return back();
+        return to_route('question.index');
     }
 
     public function destroy(Question $question)
