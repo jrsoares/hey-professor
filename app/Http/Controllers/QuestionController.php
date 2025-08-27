@@ -56,6 +56,7 @@ class QuestionController extends Controller
         ]);
 
         $question->question = request()->question;
+
         $question->save();
 
         return to_route('question.index');
