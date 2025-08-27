@@ -24,16 +24,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('question/store', [QuestionController::class, 'store'])->name('question.store');
-Route::post('question/like/{question}', App\Http\Controllers\Question\LikeController::class)->name('question.like');
-Route::post('question/unlike/{question}', App\Http\Controllers\Question\UnlikeController::class)->name('question.unlike');
-
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    #region Question Routes
+    Route::post('question/store', [QuestionController::class, 'store'])->name('question.store');
+    Route::post('question/like/{question}', App\Http\Controllers\Question\LikeController::class)->name('question.like');
+    Route::post('question/unlike/{question}', App\Http\Controllers\Question\UnlikeController::class)->name('question.unlike');
+    Route::put('question/publish/{question}', App\Http\Controllers\Question\QuestionPublishController::class)->name('question.publish');
+    #endregion
+
+    #region Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    #endregion
 });
 
 require __DIR__ . '/auth.php';
