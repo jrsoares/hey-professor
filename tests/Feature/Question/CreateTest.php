@@ -31,3 +31,16 @@ it('should check if ends with question mark ?', function () {
     assertDatabaseCount('questions', 0);
 
 });
+
+it('should create as a draft all the time', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+    post(route('question.store'), ['question' => str_repeat('a', 260) . '?']);
+    assertDatabaseHas('questions', ['question' => str_repeat('a', 260) . '?', 'draft' => true]);
+});
+
+test('only authenticated users can create a new question', function () {
+    post(route('question.store'), [
+        'question' => str_repeat('*', 8) . '?',
+    ])->assertRedirect(route('login'));
+});
