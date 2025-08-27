@@ -32,9 +32,11 @@ class QuestionController extends Controller
         return to_route('dashboard');
     }
 
-    public function edit()
+    public function edit(Question $question)
     {
+        $this->authorize('update', $question);
 
+        return view('questions.edit', compact('question'));
     }
 
     public function destroy(Question $question)
