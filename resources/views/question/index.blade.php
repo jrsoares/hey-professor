@@ -35,12 +35,12 @@
                                     Deletar
                                 </button>
                             </x-form>
-
                             <x-form :action="route('question.publish', $question)" put>
                                 <button type="submit" class="hover:underline text-blue-500">
                                     Publicar
                                 </button>
                             </x-form>
+                            <a href="{{ route('question.edit', $question)}}" class="hover:underline text-blue-500">Editar</a>
                         </x-table.td>
                     </x-table.tr>
                 @endforeach
