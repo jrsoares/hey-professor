@@ -32,6 +32,11 @@ class QuestionController extends Controller
         return to_route('dashboard');
     }
 
+    public function edit()
+    {
+
+    }
+
     public function destroy(Question $question)
     {
         $this->authorize('destroy', $question);
