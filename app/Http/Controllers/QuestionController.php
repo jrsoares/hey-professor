@@ -70,6 +70,14 @@ class QuestionController extends Controller
         return back();
     }
 
+    public function restore(int $id)
+    {
+        $question = Question::withTrashed()->find($id);
+        $question->restore();
+
+        return back();
+    }
+
     public function destroy(Question $question)
     {
         $this->authorize('destroy', $question);
