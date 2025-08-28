@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use Illuminate\Database\Eloquent\{Model, Prunable, SoftDeletes};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 class Question extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Prunable;
 
     protected $casts = [
         'draft' => 'bool',
@@ -22,5 +23,9 @@ class Question extends Model
     public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
+    }
+    public function prunable()
+    {
+        return static::where('deleted_at', '<=', now()->subMonth());
     }
 }
