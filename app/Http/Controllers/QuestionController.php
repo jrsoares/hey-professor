@@ -11,7 +11,8 @@ class QuestionController extends Controller
     public function index()
     {
         return view('question.index', [
-            'questions' => auth()->user()->questions()->get(),
+            'questions'         => auth()->user()->questions()->get(),
+            'archivedQuestions' => auth()->user()->questions()->onlyTrashed()->get(),
         ]);
     }
     public function store(): RedirectResponse
