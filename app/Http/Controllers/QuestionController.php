@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Rules\SameQuestionRule;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 
@@ -22,7 +23,9 @@ class QuestionController extends Controller
                 if ($value[strlen($value) - 1] !== '?') {
                     $fail('The ' . $attribute . ' must end with a question mark.');
                 }
-            }],
+            },
+                new SameQuestionRule(),
+            ],
         ]);
 
         auth()->user()->questions()->create([
